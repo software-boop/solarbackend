@@ -17,15 +17,35 @@ connectDB();
 const app = express();
 
 /* ==========================================================
-   🌍 Middleware
+   🌍 CORS Middleware
 ========================================================== */
+
+// You can add more origins later if needed
+const allowedOrigins = [
+  "http://localhost:5173",      // local Vite dev
+  "https://btl-bhj.pages.dev", 
+  'https://5fddbd90.btl-bhj.pages.dev' // deployed frontend
+];
+
 app.use(
   cors({
-    origin: "*", // or specify your frontend: "http://localhost:5173"
+    origin: (origin, callback) => {
+      
+      // Allow requests with no origin (like Postman, curl)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log("❌ CORS blocked origin:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(express.json({ limit: "10mb" })); // handle large base64 payloads
 
 /* ==========================================================
@@ -48,13 +68,16 @@ app.get("/", (req, res) =>
 ========================================================== */
 app.use((err, req, res, next) => {
   console.error("❌ Uncaught Error:", err);
-  res.status(500).json({ message: err.message || "Server Error" });
+  res
+    .status(500)
+    .json({ message: err.message || "Server Error" });
 });
 
 /* ==========================================================
    🚀 Server Start
 ========================================================== */
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`✅ Server running on http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log("✅ Allowed CORS origins:", allowedOrigins);
+});
