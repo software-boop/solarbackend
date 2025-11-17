@@ -24,7 +24,10 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",      // local Vite dev
   "https://btl-bhj.pages.dev", 
-  'https://5fddbd90.btl-bhj.pages.dev' // deployed frontend
+  'https://5fddbd90.btl-bhj.pages.dev',
+  "https://solarenterprenuer.pages.dev",// deployed frontend
+  'https://brihaspathitech.com'
+
 ];
 
 app.use(
@@ -55,6 +58,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/entrepreneur", entrepreneurRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/district-coordinator", districtRoutes); // ✅ mounted route
+
 
 /* ==========================================================
    🩵 Root Endpoint

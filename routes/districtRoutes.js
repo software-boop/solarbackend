@@ -16,7 +16,7 @@ import { verifyToken } from "../middleware/authMiddleware.js"; // ✅ middleware
 const router = express.Router();
 
 // All endpoints require auth
-router.get("/entrepreneurs", verifyToken, getEntrepreneursByDistrict);
+router.get("/entrepreneursfetch", verifyToken, getEntrepreneursByDistrict);
 router.put("/approve/:id", verifyToken, approveEntrepreneurDistrict);
 router.put("/reject/:id", verifyToken, rejectEntrepreneurDistrict);
 router.put("/pending/:id", verifyToken, markPendingDistrict);

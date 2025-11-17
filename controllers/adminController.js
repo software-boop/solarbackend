@@ -490,31 +490,11 @@ export const deleteEntrepreneur = async (req, res) => {
 export const getDistrictStats = async (_req, res) => {
   try {
     const districts = [
-      "Alluri Sitarama Raju",
-      "Anakapalli",
-      "Anantapur",
-      "Annamayya",
-      "Bapatla",
-      "Chittoor",
-      "East Godavari",
-      "Eluru",
-      "Guntur",
-      "Kakinada",
-      "Konaseema",
-      "Krishna",
-      "Kurnool",
-      "Nandyal",
-      "NTR",
-      "Palnadu",
-      "Parvathipuram Manyam",
-      "Prakasam",
-      "Sri Potti Sriramulu Nellore",
-      "Srikakulam",
-      "Tirupati",
-      "Visakhapatnam",
-      "Vizianagaram",
-      "West Godavari",
-      "YSR Kadapa",
+     "Alluri Sitarama Raju", "Anakapalli", "Anantapur", "Annamayya", "Bapatla",
+  "Chittoor", "East Godavari", "Eluru", "Guntur", "Kakinada", "Konaseema",
+  "Krishna", "Kurnool", "Nandyal", "NTR", "Palnadu", "Parvathipuram Manyam",
+  "Prakasam", "Sri Potti Sriramulu Nellore", "Sri Sathya Sai", "Srikakulam",
+  "Tirupati", "Visakhapatnam", "Vizianagaram", "West Godavari", "YSR Kadapa"
     ];
 
     const stats = await Promise.all(

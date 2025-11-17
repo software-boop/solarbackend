@@ -1,4 +1,4 @@
-// utils/sendMail.js
+
 import nodemailer from "nodemailer";
 
 export const sendMail = async (to, subject, html) => {

@@ -659,47 +659,121 @@ export const registerEntrepreneur = async (req, res) => {
       ? "https://www.brihaspathi.com/highbtlogo%20white-%20tm.png"
       : "https://www.brihaspathi.com/highbtlogo%20tm%20(1).png";
 
-    const html = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta name="color-scheme" content="light dark">
-          <meta name="supported-color-schemes" content="light dark">
-          <style>
-            body { margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#07518a;text-align:center; }
-            @media (prefers-color-scheme: dark) {
-              body { background:#111111 !important; color:#ffffff !important; }
-            }
-            a { color:#07518a; text-decoration:none; }
-          </style>
-        </head>
-        <body>
-          <div style="max-width:600px;margin:auto;padding:30px 20px;">
-            <img src="${logoURL}" alt="BTPL" style="max-width:180px;margin-bottom:20px;">
-            <h2>Thank You for Registering!</h2>
-            <p style="font-size:16px;line-height:1.6;">
-              Dear <strong>${fullname}</strong>,<br/>
-              We have successfully received your registration.
-            </p>
-            <div style="font-size:15px;color:#333;margin-top:10px;">
-              📍 <b>${geo?.district || "Unknown"}</b>, ${geo?.state || "Unknown"}, ${geo?.country || "Unknown"}
-            </div>
-            <div style="margin:25px 0;">
-              <a href="https://chat.whatsapp.com/DOHjxHWQBjfEHmi8N8iAT4"
-                 style="display:inline-block;margin:6px;padding:12px 20px;background:#fff;border:2px solid #07518a;border-radius:6px;font-weight:bold;color:#07518a;">
-                Join WhatsApp Community
-              </a>
-              <a href="https://www.brihaspathi.com"
-                 style="display:inline-block;margin:6px;padding:12px 20px;background:#07518a;border:2px solid #07518a;border-radius:6px;font-weight:bold;color:#ffffff;">
-                🌐 Visit Our Website
-              </a>
-            </div>
-            <p style="font-size:12px;color:#888;margin-top:25px;">
-              © 2025 <b>BTPL</b>. All rights reserved.
-            </p>
-          </div>
-        </body>
-      </html>`;
+  const html = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ffffff;
+        color: #07518a;
+        text-align: center;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #111111 !important;
+          color: #ffffff !important;
+        }
+        a {
+          color: #ffffff !important;
+        }
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 30px 20px;
+      }
+      .logo {
+        max-width: 180px;
+        margin-bottom: 20px;
+      }
+      .btn-primary {
+        display: inline-block;
+        margin: 6px;
+        padding: 12px 20px;
+        background: #07518a;
+        border: 2px solid #07518a;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #ffffff !important;
+      }
+      .btn-outline {
+        display: inline-block;
+        margin: 6px;
+        padding: 12px 20px;
+        background: #ffffff;
+        border: 2px solid #07518a;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #07518a !important;
+      }
+      .footer {
+        font-size: 12px;
+        color: #888;
+        margin-top: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Logo -->
+      <img src="${logoURL}" alt="BTPL Logo" class="logo" />
+
+      <!-- Title -->
+      <h2>Thank You for Registering!</h2>
+
+      <p style="font-size:16px; line-height:1.6;">
+        Dear <strong>${fullname}</strong>,<br/>
+        We have successfully received your registration.
+      </p>
+
+      <!-- Location Block -->
+      <div style="font-size:15px; color:#333; margin-top:10px;">
+        📍 <b>${geo?.district || district || "Unknown"}</b>,
+        ${geo?.state || state || "Unknown"},
+        ${geo?.country || "India"}
+      </div>
+
+      <!-- Buttons -->
+      <div style="margin: 25px 0;">
+
+        <a 
+          href="https://chat.whatsapp.com/DOHjxHWQBjfEHmi8N8iAT4" 
+          class="btn-outline"
+        >
+          Join WhatsApp Community
+        </a>
+
+        <a 
+          href="https://www.brihaspathi.com" 
+          class="btn-primary"
+        >
+          🌐 Visit Our Website
+        </a>
+
+      </div>
+
+      <!-- Footer -->
+      <p class="footer">
+        © 2025 <b>BTPL</b> (Brihaspathi Technologies Pvt. Ltd.). All rights reserved.
+      </p>
+
+    </div>
+  </body>
+</html>
+`;
+
 
     await sendMail(
       email,
